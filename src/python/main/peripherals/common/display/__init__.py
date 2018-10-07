@@ -3,4 +3,4 @@
 #
 
 from .RemoteDisplay import RemoteDisplay
-from .LocalDisplay import getDisplay, setDisplay, getDisplays
+from .LocalDisplay import getDisplay, setDisplay, getDisplays, datahandlerdisplays

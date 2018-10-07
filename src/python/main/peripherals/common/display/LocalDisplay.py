@@ -3,6 +3,7 @@
 #
 
 from .UpdateThread import UpdateThread
+from communication.Messages import msgSetDisplay
 from luma.oled.device import ssd1306
 from luma.core.interface.serial import i2c
 from PIL import Image
@@ -81,3 +82,11 @@ def getDisplays(displayconfigs):
             alldisplays[n] = dd
     # return it
     return(alldisplays)
+
+
+def datahandlerdisplays(displays, data):
+    if data.isSimilar(msgSetDisplay):
+        setDisplay(displays[data.data['display']], data.data['image'])
+        return(True)
+    else:
+        return(False)
