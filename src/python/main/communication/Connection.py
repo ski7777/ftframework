@@ -4,6 +4,8 @@
 
 from twisted.protocols.basic import LineReceiver
 from .Package import Package
+from .Messages import msgPing, msgPong
+from .PingThread import PingThread
 
 # this class represents the connection between two parties
 
@@ -20,6 +22,8 @@ class Connection(LineReceiver):
         self.transporter = transporter
         self.config = self.transporter.config['connection']
         self.debug = self.config['debug']
+        self.pingthread = PingThread(self)
+        self.pingthread.start()
 
     def lineReceived(self, data):
         # this method is called when a new line is recieved
@@ -35,13 +39,19 @@ class Connection(LineReceiver):
         # if it is type system, systemLineRecieved will do this
         if package.type == 'system':
             self.systemLineRecieved(package)
+        # if it is ping we answer with pong
+        elif package == msgPing:
+            self.sendData(msgPong)
+        # if it is pong we need to deliver this to the ping/pong thread
+        elif package == msgPong:
+            self.pingthread.pong()
         # if it none of the above it must be data, so we call the handledata method of the transporter
         else:
             self.transporter.handledata(package, self)
 
     def sendData(self, package):
         # check whether state is either 'ok' or it is a system message
-        if self.state == 'ok' or package.type in ['system']:
+        if self.state == 'ok' or package.type in ['system', 'ping', 'pong']:
             # print if debug prints are enabled
             if self.debug:
                 print("OUT:", package.getJSON())
