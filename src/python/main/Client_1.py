@@ -3,7 +3,8 @@
 #
 
 from communication.Client import Client
-from config import getConfig, getServerConfig
+from config import getConfig, getServerConfig, getClientConfig, getPeripheralsConfig, getDisplayConfigs
+from peripherals.common.display import getDisplays, datahandlerdisplays
 from twisted.internet import reactor
 from _thread import start_new_thread
 
@@ -12,9 +13,17 @@ NAME = 'client1'
 config = getConfig(__file__, 'config.json')
 serverconfig = getServerConfig(config)
 clientconfig = getClientConfig(config, NAME)
+displayconfigs = getDisplayConfigs(getPeripheralsConfig(clientconfig), getPeripheralsConfig(config))
+
+# initialize displays
+displays = getDisplays(displayconfigs)
+
 
 # define datahandler
 def datahandler(data, server):
+    # run datahandler -> if processed return
+    if datahandlerdisplays(displays, data):
+        return
     print(data.getJSON())
 
 
