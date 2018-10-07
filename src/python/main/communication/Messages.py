@@ -55,3 +55,12 @@ msgPong = Package({
     'status': 'ok',
     'data': {}
 })
+
+msgSetDisplay = Package({
+    'type': 'data',
+    'status': 'ok',
+    'data': {
+        'display': '',
+        'image': ''
+    }
+})
