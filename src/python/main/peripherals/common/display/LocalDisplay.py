@@ -86,7 +86,11 @@ def getDisplays(displayconfigs):
 
 def datahandlerdisplays(displays, data):
     if data.isSimilar(msgSetDisplay):
-        setDisplay(displays[data.data['display']], data.data['image'])
+        try:
+            display = displays[data.data['display']]
+            setDisplay(display, data.data['image'])
+        except KeyError:
+            pass
         return(True)
     else:
         return(False)
