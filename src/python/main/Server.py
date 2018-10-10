@@ -24,10 +24,13 @@ def datahandler(data, client):
 server = Server(datahandler, config)
 reactor.listenTCP(serverconfig['port'], server)
 start_new_thread(reactor.run, (False,))
+print("Server ready!")
+print("Waiting for clients!")
 
 # wait for clients
 while not config['clients'].keys() == set(server.clients):
     pass
+print("All clients connected!")
 
 
 # draw some test stuff on display 1 and 2

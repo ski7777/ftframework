@@ -42,6 +42,7 @@ def datahandler(data, server):
 client = Client(args.name, datahandler, config)
 reactor.connectTCP(serverconfig['host'], serverconfig['port'], client)
 start_new_thread(reactor.run, (False,))
+print("Client ready!")
 
 while True:
     pass
