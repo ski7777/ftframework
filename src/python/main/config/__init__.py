@@ -29,8 +29,11 @@ def getPeripheralsConfig(config):
 
 
 def getDisplayConfigs(client, general):
-    client = client['displays']
-    displays = general['displays']
+    try:
+        client = client['displays']
+        displays = general['displays']
+    except KeyError:
+        return({})
     for n, d in client.items():
         client[n]['config'] = displays[n]
     return(client)
