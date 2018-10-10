@@ -3,7 +3,6 @@
 #
 
 from communication.Messages import msgSetDisplay
-from base64 import b64encode
 
 # this class represents a remote display
 # It has the same API as a luma.core.device object to allow easier usage
@@ -27,6 +26,7 @@ class RemoteDisplay:
     def display(self, image):
         # image is a PIL.Image object
         # convert it to bytes, base64 encode it convert it to a string
+        from base64 import b64encode
         data = b64encode(image.tobytes()).decode('utf-8')
         # create a package
         package = msgSetDisplay

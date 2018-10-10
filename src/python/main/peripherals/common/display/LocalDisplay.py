@@ -4,17 +4,15 @@
 
 from .UpdateThread import UpdateThread
 from communication.Messages import msgSetDisplay
-from luma.oled.device import ssd1306
-from luma.core.interface.serial import i2c
-from PIL import Image
-from base64 import b64decode
 
 
 def getDisplay(config, name):
     if config['type'] == 'i2c':
+        from luma.core.interface.serial import i2c
         serial = i2c(port=config['bus'], address=config['address'])
     # TODO: Add SPI/BB support
     if config['config']['type'] == 'ssd1306':
+        from luma.oled.device import ssd1306
         reference = ssd1306
         display = reference(serial, rotate=config['config']['rotate'])
     # add support for other displays
@@ -36,6 +34,8 @@ def getDisplay(config, name):
 
 def setDisplay(display, data):
     # decode data and write it to display
+    from PIL import Image
+    from base64 import b64decode
     image = Image.frombytes(display.mode, display.size, b64decode(data.encode('utf-8')))
     display.display(display, image)
 
