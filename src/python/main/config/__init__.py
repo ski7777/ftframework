@@ -34,7 +34,7 @@ def getDisplayConfigs(client, general):
         displays = general['displays']
     except KeyError:
         return({})
-    for n, d in client.items():
+    for n in client.keys():
         client[n]['config'] = displays[n]
     return(client)
 
