@@ -45,3 +45,10 @@ def mergeConfigs(client, general, configtype):
     for n in client.keys():
         client[n]['config'] = general[n]
     return(client)
+
+
+def getIOConfig(config, controllers, name):
+    io = config['ioconfig'][name]
+    iocontroller = controllers[io['controller']]['controller']
+    port = io['port']
+    return(iocontroller, port)
