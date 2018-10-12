@@ -45,3 +45,14 @@ def findDisplay(config, name):
         p = getPeripheralsConfig(c)
         if name in p['displays']:
             return(n)
+
+
+def getControllerConfigs(client, general):
+    try:
+        client = client['controllers']
+        controllers = general['controllers']
+    except KeyError:
+        return({})
+    for n in client.keys():
+        client[n]['config'] = controllers[n]
+    return(client)
