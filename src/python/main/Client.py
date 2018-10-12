@@ -3,7 +3,7 @@
 #
 
 from communication.Client import Client
-from config import getConfig, getServerConfig, getClientConfig, getPeripheralsConfig, getDisplayConfigs, getControllerConfigs
+from config import getConfig, getServerConfig, getClientConfig, getPeripheralsConfig, mergeConfigs
 from peripherals.common.display import getDisplays, datahandlerdisplays
 from peripherals.common.controller import getControllers
 from twisted.internet import reactor
@@ -20,8 +20,8 @@ args = args.parse_args()
 config = getConfig(__file__, 'config.json')
 serverconfig = getServerConfig(config)
 clientconfig = getClientConfig(config, args.name)
-displayconfigs = getDisplayConfigs(getPeripheralsConfig(clientconfig), getPeripheralsConfig(config))
-controllerconfigs = getControllerConfigs(getPeripheralsConfig(clientconfig), getPeripheralsConfig(config))
+displayconfigs = mergeConfigs(getPeripheralsConfig(clientconfig), getPeripheralsConfig(config), 'displays')
+controllerconfigs = mergeConfigs(getPeripheralsConfig(clientconfig), getPeripheralsConfig(config), 'controllers')
 
 # initialize displays
 if args.displays:

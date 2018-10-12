@@ -28,17 +28,6 @@ def getPeripheralsConfig(config):
     return(config['peripherals'])
 
 
-def getDisplayConfigs(client, general):
-    try:
-        client = client['displays']
-        displays = general['displays']
-    except KeyError:
-        return({})
-    for n in client.keys():
-        client[n]['config'] = displays[n]
-    return(client)
-
-
 def findDisplay(config, name):
     clients = config['clients']
     for n, c in clients.items():
@@ -47,12 +36,12 @@ def findDisplay(config, name):
             return(n)
 
 
-def getControllerConfigs(client, general):
+def mergeConfigs(client, general, configtype):
     try:
-        client = client['controllers']
-        controllers = general['controllers']
+        client = client[configtype]
+        general = general[configtype]
     except KeyError:
         return({})
     for n in client.keys():
-        client[n]['config'] = controllers[n]
+        client[n]['config'] = general[n]
     return(client)
