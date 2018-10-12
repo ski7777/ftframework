@@ -5,6 +5,16 @@
 
 class BeltBidirectional:
     # this class provides a basic two-way belt
+
+    calls = {
+        'setSpeed': {
+            'arguments': [
+                ('speed', int, True)
+            ]
+        },
+        'stop': {}
+    }
+
     def __init__(self, motor):
         # motor must be a motor-like object
         self.outer = motor
@@ -23,6 +33,16 @@ class BeltBidirectional:
 
 class BeltUnidirectional:
     # this class provides a basic one-way belt
+
+    calls = {
+        'setSpeed': {
+            'arguments': [
+                ('speed', int, True)
+            ]
+        },
+        'stop': {}
+    }
+
     def __init__(self, output):
         # output must be an output-like object
         self.outer = output
@@ -42,6 +62,18 @@ class BeltUnidirectional:
 class BeltStopSensor:
     # this class is an addition to BeltBidirectional and BeltUnidirectional
     # it provides a stop sensor and function for easy integration
+
+    calls = {
+        'getStopsensor': {
+            'return': bool
+        },
+        'moveToSensor': {
+            'arguments': [
+                ('speed', int, True)
+            ]
+        }
+    }
+
     def __init__(self, input, invert=False):
         # input must be an input-like object
         # set invert if the state of input is normally True
@@ -71,6 +103,23 @@ class BeltStopSensor:
 class BeltImpulseSensor(BeltBidirectional):
     # this class is an addition to BeltBidirectional
     # it provides an impulse sensor and function for easy integration
+
+    calls = {
+        'getMoveFinished': {
+            'return': bool
+        },
+        'getCurrentDistance': {
+            'return': int
+        },
+        'moveDistance': {
+            'arguments': [
+                ('speed', int, True),
+                ('distance', int, True),
+                ('wait', bool, False)
+            ]
+        }
+    }
+
     def __init__(self, motor):
         # motor must be a motor-like object
         # initialize BeltBidirectional

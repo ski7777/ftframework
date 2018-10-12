@@ -5,6 +5,15 @@
 
 class PneumaticPusher:
     # this class provides a simple pneumatic pusher
+
+    calls = {
+        'setPos': {
+            'arguments': [
+                ('pos', bool, True)
+            ]
+        }
+    }
+
     def __init__(self, output, invert=False, maxlevel=512):
         # outer must be an output-like object
         # set invert if output is inverted
