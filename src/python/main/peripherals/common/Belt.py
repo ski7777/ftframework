@@ -29,9 +29,9 @@ class BeltUnidirectional:
         # stop Belt
         self.stop()
 
-    def setSpeed(self, speed):,
-    # this function set the speed of the belt
-    # values for speed are in range 0 to 512
+    def setSpeed(self, speed):
+        # this function set the speed of the belt
+        # values for speed are in range 0 to 512
         self.outer.setLevel(speed)
 
     def stop(self):
@@ -61,7 +61,7 @@ class BeltStopSensor:
         self.setSpeed(speed)
         # check sensor
         while not getStopsensor():
-            #stay in loop
+            # stay in loop
             pass
         # now the sensor was triggered
         # stop belt
@@ -98,10 +98,10 @@ class BeltImpulseSensor(BeltBidirectional):
         self.setSpeed(speed)
         # check whether wait is set
         if wait:
-            #wait is set
+            # wait is set
             # check move finished
             while not self.getMoveFinished():
-                #stay in loop
+                # stay in loop
                 pass
             # stop implies that we stop the belt here. This is done automatically
             # this is just to it up
