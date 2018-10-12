@@ -6,6 +6,7 @@ from communication.Client import Client
 from config import getConfig, getServerConfig, getClientConfig, getPeripheralsConfig, mergeConfigs
 from peripherals.common.display import getDisplays, datahandlerdisplays
 from peripherals.common.controller import getControllers
+from peripherals.common.importhelper import getClasses, initializeClasses
 from twisted.internet import reactor
 from _thread import start_new_thread
 import argparse
@@ -22,6 +23,7 @@ serverconfig = getServerConfig(config)
 clientconfig = getClientConfig(config, args.name)
 displayconfigs = mergeConfigs(getPeripheralsConfig(clientconfig), getPeripheralsConfig(config), 'displays')
 controllerconfigs = mergeConfigs(getPeripheralsConfig(clientconfig), getPeripheralsConfig(config), 'controllers')
+complexperipheralsconfigs = mergeConfigs(getPeripheralsConfig(clientconfig), getPeripheralsConfig(config), 'complex')
 
 # initialize displays
 if args.displays:
@@ -31,6 +33,10 @@ else:
 
 # initialize controllers
 controllers = getControllers(controllerconfigs)
+
+# initialie complex peripherals
+# load classes
+complex = initializeClasses(getClasses(complexperipheralsconfigs), controllers)
 
 # define datahandler
 
