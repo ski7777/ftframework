@@ -34,7 +34,7 @@ class Connection(LineReceiver):
         package.loadJSON(data.decode('utf-8'))
         # print if debug prints are enabled
         if self.debug:
-            print("IN:", package.getJSON())
+            print('IN:', package.getJSON())
         # now the package needs to be handled somewhere
         # if it is type system, systemLineRecieved will do this
         if package.type == 'system':
@@ -54,7 +54,7 @@ class Connection(LineReceiver):
         if self.state == 'ok' or package.type in ['system', 'ping', 'pong']:
             # print if debug prints are enabled
             if self.debug:
-                print("OUT:", package.getJSON())
+                print('OUT:', package.getJSON())
             # send data
             self.sendLine(package.getJSON().encode('utf-8'))
             return(True)
