@@ -33,7 +33,8 @@ msgLogin = Package({
     'status': 'ok',
     'data': {
         'message': 'login',
-        'name': ''
+        'name': '',
+        'checksum': ''
     }
 })
 
