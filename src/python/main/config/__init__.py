@@ -4,6 +4,7 @@
 
 import json
 import os
+import hashlib
 
 
 # just some helper methods around the configuration file
@@ -13,6 +14,7 @@ def getConfig(runfile, name):
     path = os.path.join(os.path.dirname(os.path.abspath(runfile)), name)
     with open(path) as f:
         data = json.load(f)
+    data['checksum'] = hashlib.md5(json.dumps(data, sort_keys=True).encode('utf-8')).hexdigest()
     return(data)
 
 
