@@ -15,7 +15,8 @@ msgRejected = Package({
     'type': 'system',
     'status': 'ok',
     'data': {
-        'message': 'rejected'
+        'message': 'rejected',
+        'reason': ''
     }
 })
 
