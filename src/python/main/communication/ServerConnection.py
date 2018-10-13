@@ -26,10 +26,19 @@ class ServerConnection(Connection):
             # state 'open' and package msgLogin
             # get name
             self.name = package.data['name']
+            checksum = package.data['checksum']
             # check whether name is already legged in
             if self.name in self.transporter.clients:
                 # already logged in -> reject
-                self.sendData(msgRejected)
+                msg = msgRejected
+                msg.data['reason'] = 'Client already logged in!'
+                self.sendData(msg)
+                return
+            if self.checksum != checksum:
+                # checksum mismatch -> reject
+                msg = msgRejected
+                msg.data['reason'] = 'Configuration mismatch!'
+                self.sendData(msg)
                 return
             # else add client and accept
             self.transporter.clients[self.name] = self
