@@ -24,7 +24,7 @@ class ServerConnection(Connection):
         # handle recieved system packages
         if self.state == 'open' and package.isSimilar(msgLogin):
             # state 'open' and package msgLogin
-            # get name
+            # get name and checksum
             self.name = package.data['name']
             checksum = package.data['checksum']
             # check whether name is already legged in

@@ -23,7 +23,7 @@ class ClientConnection(Connection):
         if self.state == 'open' and package == msgConnected:
             # state 'open' and package msgConnected
             # this is the request by the server to login
-            # load package and fill in name
+            # load package and fill in nameand checksum
             login = msgLogin
             login.data['name'] = self.name
             login.data['checksum'] = self.checksum
