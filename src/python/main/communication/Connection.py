@@ -21,6 +21,7 @@ class Connection(LineReceiver):
         # transporter can be either Server or Client
         self.transporter = transporter
         self.config = self.transporter.config['connection']
+        self.checksum = self.transporter.config['checksum']
         self.debug = self.config['debug']
         self.pingthread = PingThread(self)
         self.pingthread.start()
