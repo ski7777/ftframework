@@ -35,7 +35,7 @@ class ClientConnection(Connection):
             if package == msgAccepted:
                 # either the connection is accepted -> set state 'ok'
                 self.state = 'ok'
-            elif package == msgRejected:
+            elif package.isSimilar(msgRejected):
                 # or not -> close connection
                 self.transporter.close()
         if package == msgClose:
