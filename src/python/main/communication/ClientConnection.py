@@ -26,6 +26,7 @@ class ClientConnection(Connection):
             # load package and fill in name
             login = msgLogin
             login.data['name'] = self.name
+            login.data['checksum'] = self.checksum
             # send data and set new state
             self.sendData(login)
             self.state = 'login'  # 'login' means that the login process is pending
