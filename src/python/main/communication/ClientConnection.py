@@ -38,5 +38,7 @@ class ClientConnection(Connection):
             elif package.isSimilar(msgRejected):
                 # or not -> close connection
                 self.transporter.close()
+                print("Connection rejected")
+                print("Reason:", package.data['reason'])
         if package == msgClose:
             self.transporter.close()
