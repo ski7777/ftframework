@@ -39,12 +39,17 @@ controllers = getControllers(controllerconfigs)
 complex = initializeClasses(getClasses(complexperipheralsconfigs), controllers)
 
 # define datahandler
-
+datahandlers = [(datahandlerdisplays, displays)
 
 def datahandler(data, server):
     # run datahandler -> if processed return
-    if datahandlerdisplays(displays, data):
-        return
+    for d, v in datahandlers:
+        arg = []
+        if v != None:
+            arg.append(v)
+        arg.append(data)
+        if d(*arg):
+            return
     print(data.getJSON())
 
 
