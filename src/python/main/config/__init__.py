@@ -54,3 +54,35 @@ def getIOConfig(config, controllers, name):
     iocontroller = controllers[io['controller']]['controller']
     port = io['port']
     return(iocontroller, port)
+
+
+def getServerPeripheralConfig(config, names):
+    # function to find peripheral by name in all clients
+    def findPeripheral(config, name):
+        # iterate over clients
+        for n, d in config.items():
+            # return name of client if found
+            if name in d:
+                return n
+        # else raise KeyError
+        raise KeyError
+    # create dict(name->{}) for all types of peripherals
+    peripherals = dict([(n, {}) for n in names])
+    # iterate over clients
+    for n, d in config['clients'].items():
+        # iterate over types
+        for pn in names:
+            try:
+                # add list of names of peripherals of peripheral type of client
+                peripherals[pn][n] = list(getPeripheralsConfig(d)[pn].keys())
+            except KeyError:
+                pass
+    # get minimized peripheral configs for peripheral types
+    config = dict([(n, d) for n, d in getPeripheralsConfig(config).items() if n in names])
+    # iterate over peripheral types
+    for cn, cd in config.items():
+        # iterate over peripheral names
+        for pn in cd.keys():
+            # save client name in peripheral
+            config[cn][pn]['client'] = findPeripheral(peripherals[cn], pn)
+    return(config)
