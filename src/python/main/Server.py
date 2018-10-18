@@ -3,7 +3,7 @@
 #
 
 from communication.Server import Server
-from config import getConfig, getServerConfig, findDisplay
+from config import getConfig, getServerConfig, findDisplay, getServerPeripheralConfig
 from peripherals.common.display import RemoteDisplay as Display
 from twisted.internet import reactor
 from luma.core.render import canvas
@@ -14,6 +14,7 @@ from datetime import datetime
 # load config and get special parts
 config = getConfig(__file__, 'config.json')
 serverconfig = getServerConfig(config)
+peripheralsconfig = getServerPeripheralConfig(config, ['displays', 'complex'])
 
 
 def datahandler(data, client):
