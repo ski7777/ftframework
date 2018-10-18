@@ -5,6 +5,7 @@
 from communication.Server import Server
 from config import getConfig, getServerConfig, findDisplay, getServerPeripheralConfig
 from peripherals.common.display import RemoteDisplay as Display
+from peripherals.common.complex.RemoteClass import initializeRemoteClasses
 from twisted.internet import reactor
 from luma.core.render import canvas
 from _thread import start_new_thread
@@ -33,6 +34,7 @@ while not config['clients'].keys() == set(server.clients):
     pass
 print('All clients connected!')
 
+complex = initializeRemoteClasses(peripheralsconfig['complex'], server.clients)
 
 # draw some test stuff on display 1 and 2
 display1 = Display(config['peripherals']['displays']['display1'], 'display1', server.clients[findDisplay(config, 'display1')])
