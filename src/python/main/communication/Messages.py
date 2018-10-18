@@ -66,3 +66,13 @@ msgSetDisplay = Package({
         'image': ''
     }
 })
+
+msgCall = Package({
+    'type': 'data',
+    'status': 'ok',
+    'data': {
+        'peripheral': '',
+        'call': '',
+        'arguments': {}
+    }
+})
