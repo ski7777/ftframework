@@ -6,7 +6,7 @@ from communication.Client import Client
 from config import getConfig, getServerConfig, getClientConfig, getPeripheralsConfig, mergeConfigs
 from peripherals.common.display import getDisplays, datahandlerdisplays
 from peripherals.common.controller import getControllers
-from peripherals.common.complex.LocalClass import getClasses, initializeClasses
+from peripherals.common.complex.LocalClass import getClasses, initializeClasses, datahandlercomplex
 from twisted.internet import reactor
 from _thread import start_new_thread
 import argparse
@@ -39,7 +39,8 @@ controllers = getControllers(controllerconfigs)
 complex = initializeClasses(getClasses(complexperipheralsconfigs), controllers)
 
 # define datahandler
-datahandlers = [(datahandlerdisplays, displays)
+datahandlers = [(datahandlerdisplays, displays), (datahandlercomplex, complex)]
+
 
 def datahandler(data, server):
     # run datahandler -> if processed return
