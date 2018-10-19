@@ -26,7 +26,7 @@ def initializeClasses(complex, controllers):
     return(complex)
 
 
-def datahandlercomplex(complex, data):
+def datahandlercomplex(complex, server, data):
     if data.isSimilar(msgCall):
         try:
             # get complex

@@ -84,7 +84,7 @@ def getDisplays(displayconfigs):
     return(alldisplays)
 
 
-def datahandlerdisplays(displays, data):
+def datahandlerdisplays(displays, server, data):
     if data.isSimilar(msgSetDisplay):
         try:
             display = displays[data.data['display']]

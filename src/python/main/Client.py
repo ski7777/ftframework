@@ -48,6 +48,7 @@ def datahandler(data, server):
         arg = []
         if v != None:
             arg.append(v)
+        arg.append(server)
         arg.append(data)
         if d(*arg):
             return
