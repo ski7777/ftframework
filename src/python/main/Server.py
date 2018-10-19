@@ -17,8 +17,20 @@ config = getConfig(__file__, 'config.json')
 serverconfig = getServerConfig(config)
 peripheralsconfig = getServerPeripheralConfig(config, ['displays', 'complex'])
 
+# define datahandler
+datahandlers = []
+
 
 def datahandler(data, client):
+    # run datahandler -> if processed return
+    for d, v in datahandlers:
+        arg = []
+        if v != None:
+            arg.append(v)
+        arg.append(client)
+        arg.append(data)
+        if d(*arg):
+            return
     print(client.name, data.getJSON())
 
 
