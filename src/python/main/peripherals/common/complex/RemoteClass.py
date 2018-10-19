@@ -7,11 +7,12 @@ from communication.Messages import msgCall
 
 
 class RemoteClass:
-    def __init__(self, name, config, client):
+    def __init__(self, name, config, client, calldispatcher):
         self.name = name
         self.cls = getClass(config)
         self.client = client
         self.calls = self.cls.calls
+        self.calldispatcher = calldispatcher
 
     def __getattr__(self, name):
         # define universal method
@@ -58,10 +59,10 @@ class RemoteClass:
         return(method)
 
 
-def initializeRemoteClasses(config, clients):
+def initializeRemoteClasses(config, clients, calldispatcher):
     classes = {}
     # iterate over complex
     for n, d in config.items():
         # initialize RemoteClass for each complex with name, config and client
-        classes[n] = RemoteClass(n, d, clients[d['client']])
+        classes[n] = RemoteClass(n, d, clients[d['client']], calldispatcher)
     return(classes)

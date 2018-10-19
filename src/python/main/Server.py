@@ -49,7 +49,7 @@ while not config['clients'].keys() == set(server.clients):
     pass
 print('All clients connected!')
 
-complex = initializeRemoteClasses(peripheralsconfig['complex'], server.clients)
+complex = initializeRemoteClasses(peripheralsconfig['complex'], server.clients, calldispatcher)
 
 # draw some test stuff on display 1 and 2
 display1 = Display(config['peripherals']['displays']['display1'], 'display1', server.clients[findDisplay(config, 'display1')])
