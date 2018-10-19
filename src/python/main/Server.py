@@ -21,7 +21,7 @@ peripheralsconfig = getServerPeripheralConfig(config, ['displays', 'complex'])
 calldispatcher = RemoteCallDispatcher()
 
 # define datahandler
-datahandlers = []
+datahandlers = [(calldispatcher.datahandler, None)]
 
 
 def datahandler(data, client):
