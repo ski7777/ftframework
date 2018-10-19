@@ -6,6 +6,7 @@ from communication.Server import Server
 from config import getConfig, getServerConfig, findDisplay, getServerPeripheralConfig
 from peripherals.common.display import RemoteDisplay as Display
 from peripherals.common.complex.RemoteClass import initializeRemoteClasses
+from peripherals.common.complex.RemoteCallDispatcher import RemoteCallDispatcher
 from twisted.internet import reactor
 from luma.core.render import canvas
 from _thread import start_new_thread
@@ -16,6 +17,8 @@ from datetime import datetime
 config = getConfig(__file__, 'config.json')
 serverconfig = getServerConfig(config)
 peripheralsconfig = getServerPeripheralConfig(config, ['displays', 'complex'])
+
+calldispatcher = RemoteCallDispatcher()
 
 # define datahandler
 datahandlers = []
