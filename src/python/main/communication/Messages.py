@@ -77,3 +77,12 @@ msgCall = Package({
         'arguments': {}
     }
 })
+
+msgCallResponse = Package({
+    'type': 'data',
+    'status': 'ok',
+    'data': {
+        'id': '',
+        'value': None
+    }
+})
