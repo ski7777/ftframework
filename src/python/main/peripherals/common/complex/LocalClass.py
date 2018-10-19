@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 
-from communication.Messages import msgCall
+from communication.Messages import msgCall, msgCallResponse
 
 
 def getClass(config):
@@ -32,7 +32,12 @@ def datahandlercomplex(complex, server, data):
             # get complex
             complex = complex[data.data['peripheral']]
             # get method by object and name, call it with arguments
-            getattr(complex['object'], data.data['call'])(**data.data['arguments'])
+            retval = getattr(complex['object'], data.data['call'])(**data.data['arguments'])
+            if 'return' in complex['object'].calls[data.data['call']]:
+                ret = msgCallResponse
+                ret.data['id'] = data.data['id']
+                ret.data['value'] = retval
+                server.sendData(ret)
         except KeyError:
             pass
         return(True)
