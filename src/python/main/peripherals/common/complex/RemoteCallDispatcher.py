@@ -3,6 +3,8 @@
 #
 
 from threading import Lock
+from communication.Messages import msgCallResponse
+from uuid import uuid4
 
 
 class RemoteCallDispatcher:
@@ -45,3 +47,20 @@ class RemoteCallDispatcher:
             return(True)
         else:
             return(False)
+
+    def getCall(self):
+        # return RemoteCall with dispatcher
+        return(RemoteCall(self))
+
+
+class RemoteCall:
+    def __init__(self, dispatcher):
+        # generate id
+        self.id = uuid4().hex
+        self.dispatcher = dispatcher
+        # register
+        self.dispatcher.registerCall(self.id)
+
+    def waitOnResponse(self):
+        # call parent
+        return(self.dispatcher.waitOnResponse(self.id))
