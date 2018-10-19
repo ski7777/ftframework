@@ -54,8 +54,19 @@ class RemoteClass:
             msgCall.data['peripheral'] = self.name
             msgCall.data['call'] = name
             msgCall.data['arguments'] = arguments
+            # check whether function returns value
+            retval = 'return' in self.calls[name]
+            if retval:
+                # initialize RemoteCall
+                call = self.calldispatcher.getCall()
+                # set id in package
+                msgCall.data['id'] = call.id
             # send data
             self.client.sendData(pkg)
+            if retval:
+                # return return value
+                return(call.waitOnResponse())
+            # no return value -> no return
         return(method)
 
 
