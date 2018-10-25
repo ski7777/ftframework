@@ -30,8 +30,7 @@ def getPeripheralsConfig(config):
     return(config['peripherals'])
 
 
-def findDisplay(config, name):
-    clients = config['clients']
+def findDisplay(clients, name):
     for n, c in clients.items():
         p = getPeripheralsConfig(c)
         if name in p['displays']:

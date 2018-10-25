@@ -2,5 +2,5 @@
 # -*- coding: utf-8 -*-
 #
 
-from .RemoteDisplay import RemoteDisplay
-from .LocalDisplay import getDisplay, setDisplay, getDisplays, datahandlerdisplays
+from .RemoteDisplay import initializeRemoteDisplays
+from .LocalDisplay import getDisplays, datahandlerdisplays

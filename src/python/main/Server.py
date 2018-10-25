@@ -3,8 +3,8 @@
 #
 
 from communication.Server import Server
-from config import getConfig, getServerConfig, findDisplay, getServerPeripheralConfig
-from peripherals.common.display import RemoteDisplay as Display
+from config import getConfig, getServerConfig, getServerPeripheralConfig
+from peripherals.common.display import initializeRemoteDisplays
 from peripherals.common.complex.RemoteClass import initializeRemoteClasses
 from peripherals.common.complex.RemoteCallDispatcher import RemoteCallDispatcher
 from twisted.internet import reactor
@@ -50,10 +50,11 @@ while not config['clients'].keys() == set(server.clients):
 print('All clients connected!')
 
 complex = initializeRemoteClasses(peripheralsconfig['complex'], server.clients, calldispatcher)
+displays = initializeRemoteDisplays(peripheralsconfig['displays'], config['clients'], server.clients)
 
 # draw some test stuff on display 1 and 2
-display1 = Display(config['peripherals']['displays']['display1'], 'display1', server.clients[findDisplay(config, 'display1')])
-display2 = Display(config['peripherals']['displays']['display2'], 'display2', server.clients[findDisplay(config, 'display2')])
+display1 = displays['display1']
+display2 = displays['display2']
 cnt = 0
 while True:
     cnt += 1
