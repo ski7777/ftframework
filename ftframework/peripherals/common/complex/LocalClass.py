@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 
-from communication.Messages import msgCall, msgCallResponse
+from ftframework.communication.Messages import msgCall, msgCallResponse
 
 
 def getClass(config):

@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 #
 
-from communication.Server import Server
-from config import getConfig, getServerConfig, getServerPeripheralConfig
-from peripherals.common.display import initializeRemoteDisplays
-from peripherals.common.complex.RemoteClass import initializeRemoteClasses
-from peripherals.common.complex.RemoteCallDispatcher import RemoteCallDispatcher
+from ftframework.communication.Server import Server
+from ftframework.config import getConfig, getServerConfig, getServerPeripheralConfig
+from ftframework.peripherals.common.display import initializeRemoteDisplays
+from ftframework.peripherals.common.complex.RemoteClass import initializeRemoteClasses
+from ftframework.peripherals.common.complex.RemoteCallDispatcher import RemoteCallDispatcher
 from twisted.internet import reactor
 from luma.core.render import canvas
 from _thread import start_new_thread

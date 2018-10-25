@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 #
 
-from communication.Messages import msgSetDisplay
-from config import findDisplay
+from ftframework.communication.Messages import msgSetDisplay
+from ftframework.config import findDisplay
 # this class represents a remote display
 # It has the same API as a luma.core.device object to allow easier usage
 

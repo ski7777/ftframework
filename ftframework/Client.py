@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 #
 
-from communication.Client import Client
-from config import getConfig, getServerConfig, getClientConfig, getPeripheralsConfig, mergeConfigs
-from peripherals.common.display import getDisplays, datahandlerdisplays
-from peripherals.common.controller import getControllers
-from peripherals.common.complex.LocalClass import getClasses, initializeClasses, datahandlercomplex
+from ftframework.communication.Client import Client
+from ftframework.config import getConfig, getServerConfig, getClientConfig, getPeripheralsConfig, mergeConfigs
+from ftframework.peripherals.common.display import getDisplays, datahandlerdisplays
+from ftframework.peripherals.common.controller import getControllers
+from ftframework.peripherals.common.complex.LocalClass import getClasses, initializeClasses, datahandlercomplex
 from twisted.internet import reactor
 from _thread import start_new_thread
 import argparse

@@ -3,7 +3,7 @@
 #
 
 from .UpdateThread import UpdateThread
-from communication.Messages import msgSetDisplay
+from ftframework.communication.Messages import msgSetDisplay
 
 
 def getDisplay(config, name):

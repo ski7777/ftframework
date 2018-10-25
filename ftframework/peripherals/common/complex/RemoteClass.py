@@ -3,7 +3,7 @@
 #
 
 from .LocalClass import getClass
-from communication.Messages import msgCall
+from ftframework.communication.Messages import msgCall
 
 
 class RemoteClass:

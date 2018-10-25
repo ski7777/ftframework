@@ -3,7 +3,7 @@
 #
 
 from threading import Lock
-from communication.Messages import msgCallResponse
+from ftframework.communication.Messages import msgCallResponse
 from uuid import uuid4
 
 
