@@ -15,10 +15,11 @@ import socket
 args = argparse.ArgumentParser(description='ftFramework client')
 args.add_argument('--name', default=socket.gethostname(), help='The name of the client')
 args.add_argument('--disable-displays', action='store_false', default=True, dest='displays', help='Set  this if displays should be disabled')
+args.add_argument('config', help='Path to global config.json')
 args = args.parse_args()
 
 # load config and get special parts
-config = getConfig(__file__, 'config.json')
+config = getConfig(args.config)
 serverconfig = getServerConfig(config)
 clientconfig = getClientConfig(config, args.name)
 displayconfigs = mergeConfigs(getPeripheralsConfig(clientconfig), getPeripheralsConfig(config), 'displays')
