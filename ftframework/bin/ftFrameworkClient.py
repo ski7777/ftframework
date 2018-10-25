@@ -11,6 +11,9 @@ from twisted.internet import reactor
 from _thread import start_new_thread
 import argparse
 import socket
+import sys
+
+sys.path.append('.')
 
 args = argparse.ArgumentParser(description='ftFramework client')
 args.add_argument('--name', default=socket.gethostname(), help='The name of the client')

@@ -6,7 +6,11 @@ from ftframework.communication.Messages import msgCall, msgCallResponse
 
 
 def getClass(config):
-    module = __import__(config['path'], fromlist=[config['name']])
+    if config['builtin']:
+        prefix = 'ftframework.peripherals.common'
+    else:
+        prefix = ''
+    module = __import__(prefix + config['path'], fromlist=[config['name']])
     return(getattr(module, config['name']))
 
 
