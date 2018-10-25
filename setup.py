@@ -7,5 +7,6 @@ setup(name='ftframework',
       author_email='r.jacob2002@gmail.com',
       url='https://github.com/ski7777/ftframework',
       license='GPLv3',
-      packages=find_packages()
+      packages=find_packages(),
+      scripts=['ftframework/bin/ftFrameworkClient.py']
       )
