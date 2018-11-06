@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 #
 
+from ftframework.peripherals.CallComposer import composeCalls
+
 
 class BeltBidirectional:
     # this class provides a basic two-way belt
@@ -100,6 +102,7 @@ class BeltStopSensor:
         self.stop()
 
 
+@composeCalls
 class BeltImpulseSensor(BeltBidirectional):
     # this class is an addition to BeltBidirectional
     # it provides an impulse sensor and function for easy integration
