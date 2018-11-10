@@ -4,6 +4,8 @@
 
 from ftframework.communication.Messages import msgSetDisplay
 from ftframework.config import findDisplay
+
+
 # this class represents a remote display
 # It has the same API as a luma.core.device object to allow easier usage
 
@@ -42,4 +44,4 @@ def initializeRemoteDisplays(displaysconfig, clientsconfig, clients):
     for n, d in displaysconfig.items():
         # initialize RemoteDisplay for each display with name, config and client
         displays[n] = RemoteDisplay(d, n, clients[findDisplay(clientsconfig, n)])
-    return(displays)
+    return (displays)

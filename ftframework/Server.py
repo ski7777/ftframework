@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 #
 
+from _thread import start_new_thread
+
+from twisted.internet import reactor
+
 from ftframework.communication.Server import Server as ComServer
 from ftframework.config import getConfig, getServerConfig, getServerPeripheralConfig
-from ftframework.peripherals.common.display import initializeRemoteDisplays
-from ftframework.peripherals.common.complex.RemoteClass import initializeRemoteClasses
 from ftframework.peripherals.common.complex.RemoteCallDispatcher import RemoteCallDispatcher
-from twisted.internet import reactor
-from _thread import start_new_thread
+from ftframework.peripherals.common.complex.RemoteClass import initializeRemoteClasses
+from ftframework.peripherals.common.display import initializeRemoteDisplays
 
 
 class Server:
@@ -37,7 +39,7 @@ class Server:
     def registerDataHandler(self, call, data=None):
         self.datahandlers.append((call, data))
 
-    def datahandler(data, client):
+    def datahandler(self, data, client):
         # run datahandler -> if processed return
         for d, v in self.datahandlers:
             arg = []

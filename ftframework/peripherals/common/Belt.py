@@ -84,7 +84,7 @@ class BeltStopSensor:
 
     def getStopsensor(self):
         # this function returns the state of the input
-        return(self.invert != self.stopsensor.state())
+        return (self.invert != self.stopsensor.state())
 
     def moveToSensor(self, speed):
         # this function starts the belt at the given speed and
@@ -94,7 +94,7 @@ class BeltStopSensor:
         # start belt
         self.setSpeed(speed)
         # check sensor
-        while not getStopsensor():
+        while not self.getStopsensor():
             # stay in loop
             pass
         # now the sensor was triggered
@@ -130,11 +130,11 @@ class BeltImpulseSensor(BeltBidirectional):
 
     def getMoveFinished(self):
         # this function returns whether the move is finished
-        return(self.outer.finished())
+        return (self.outer.finished())
 
     def getCurrentDistance(self):
         # this function returns the current distance
-        return(self.outer.getCurrentDistance())
+        return (self.outer.getCurrentDistance())
 
     def moveDistance(self, speed, distance, wait=False):
         # this function moves the belt for a given distance

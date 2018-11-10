@@ -3,8 +3,9 @@
 #
 
 from threading import Lock
-from ftframework.communication.Messages import msgCallResponse
 from uuid import uuid4
+
+from ftframework.communication.Messages import msgCallResponse
 
 
 class RemoteCallDispatcher:
@@ -32,7 +33,7 @@ class RemoteCallDispatcher:
                 ret = True
             self.datalock.release()
         # return value
-        return(val)
+        return (val)
 
     def datahandler(self, server, data):
         # process packages
@@ -44,13 +45,13 @@ class RemoteCallDispatcher:
                 self.datalock.release()
             except KeyError:
                 pass
-            return(True)
+            return (True)
         else:
-            return(False)
+            return (False)
 
     def getCall(self):
         # return RemoteCall with dispatcher
-        return(RemoteCall(self))
+        return (RemoteCall(self))
 
 
 class RemoteCall:
@@ -63,4 +64,4 @@ class RemoteCall:
 
     def waitOnResponse(self):
         # call parent
-        return(self.dispatcher.waitOnResponse(self.id))
+        return (self.dispatcher.waitOnResponse(self.id))

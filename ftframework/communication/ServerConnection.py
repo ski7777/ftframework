@@ -3,8 +3,8 @@
 #
 
 from .Connection import Connection
-from .Messages import msgConnected, msgAccepted, msgRejected, msgLogin, msgClose
-from .Package import Package
+from .Messages import msgAccepted, msgClose, msgConnected, msgLogin, msgRejected
+
 
 # this class represents the connection between two parties on the server side
 

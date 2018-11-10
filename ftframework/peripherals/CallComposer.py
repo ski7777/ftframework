@@ -15,4 +15,4 @@ def composeCalls(cls):
     # set calls in class
     cls.calls = calls
     # return class
-    return(cls)
+    return (cls)

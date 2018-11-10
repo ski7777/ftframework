@@ -5,6 +5,7 @@
 import threading
 import time
 
+
 # this thread manages the update of all displays of one interface
 # (It´s not needed that all displays of this thread are on the same interface
 # but it´s recommended for higher frame rates)
@@ -44,7 +45,7 @@ class UpdateThread(threading.Thread):
     def setData(self, data, name):
         # this is to save a new image for a display
         # check display name is available
-        assert(name in self.displays)
+        assert (name in self.displays)
         # acquire lock
         self.datalock.acquire()
         # save data

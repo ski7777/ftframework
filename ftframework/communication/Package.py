@@ -3,6 +3,7 @@
 #
 import json
 
+
 # A package is a block of data tranfered between two end points
 
 
@@ -21,15 +22,15 @@ class Package:
     def getJSON(self):
         # this method returns a JSON to send to the other party
         # validate the data
-        assert((
-            self.type in ['system', 'data'] and self.status in ['ok', 'error'] and self.data != {}
-        ) or (
-            self.type in ['ping', 'pong'] and self.status == 'ok' and self.data == {}
-        ))
+        assert ((
+                        self.type in ['system', 'data'] and self.status in ['ok', 'error'] and self.data != {}
+                ) or (
+                        self.type in ['ping', 'pong'] and self.status == 'ok' and self.data == {}
+                ))
         # build package
         data = {'type': self.type, 'status': self.status, 'data': self.data}
         # return JSON
-        return(json.dumps(data, sort_keys=True))
+        return (json.dumps(data, sort_keys=True))
 
     def loadJSON(self, data):
         # load the given JSON
@@ -48,5 +49,6 @@ class Package:
     def isSimilar(self, other):
         # this method checks whether the two packages are similar to each other
         if isinstance(other, Package):
-            return self.type == other.type and self.status == other.status and sorted(list(self.data.keys())) == sorted(list(other.data.keys()))
+            return self.type == other.type and self.status == other.status and sorted(list(self.data.keys())) == sorted(
+                list(other.data.keys()))
         return False

@@ -1,9 +1,11 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-from .Messages import msgPing
 import threading
 import time
+
+from .Messages import msgPing
+
 
 # this thread handles periodic ping requests
 

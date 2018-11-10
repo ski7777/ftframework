@@ -3,7 +3,9 @@
 #
 
 from twisted.internet.protocol import ClientFactory
+
 from .ClientConnection import ClientConnection
+
 
 # This is the client class. It handles the client itself but not the connection
 

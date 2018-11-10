@@ -11,7 +11,7 @@ def getClass(config):
     else:
         prefix = ''
     module = __import__(prefix + config['path'], fromlist=[config['name']])
-    return(getattr(module, config['name']))
+    return (getattr(module, config['name']))
 
 
 def getClasses(config):
@@ -21,13 +21,13 @@ def getClasses(config):
             'class': getClass(c['config']),
             'config': c
         }
-    return(classes)
+    return (classes)
 
 
 def initializeClasses(complex, controllers):
     for n, d in complex.items():
         complex[n]['object'] = d['class'](d['config'], controllers)
-    return(complex)
+    return (complex)
 
 
 def datahandlercomplex(complex, server, data):
@@ -55,6 +55,6 @@ def datahandlercomplex(complex, server, data):
         # catch KeyError here. If peripheral is unknown we will catch it here
         except KeyError:
             pass
-        return(True)
+        return (True)
     else:
-        return(False)
+        return (False)

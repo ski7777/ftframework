@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 #
 
-from .UpdateThread import UpdateThread
 from ftframework.communication.Messages import msgSetDisplay
+from .UpdateThread import UpdateThread
 
 
 def getDisplay(config, name):
@@ -17,7 +17,7 @@ def getDisplay(config, name):
         display = reference(serial, rotate=config['config']['rotate'])
     # add support for other displays
     else:
-        return(None)
+        return (None)
 
     # save reference and name in display
     display.reference = reference
@@ -29,7 +29,7 @@ def getDisplay(config, name):
         self.thread.setData(data, self.name)
 
     display.display = display_
-    return(display)
+    return (display)
 
 
 def setDisplay(display, data):
@@ -81,7 +81,7 @@ def getDisplays(displayconfigs):
         for n, dd in d.items():
             alldisplays[n] = dd
     # return it
-    return(alldisplays)
+    return (alldisplays)
 
 
 def datahandlerdisplays(displays, server, data):
@@ -91,6 +91,6 @@ def datahandlerdisplays(displays, server, data):
             setDisplay(display, data.data['image'])
         except KeyError:
             pass
-        return(True)
+        return (True)
     else:
-        return(False)
+        return (False)

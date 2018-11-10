@@ -2,22 +2,25 @@
 # -*- coding: utf-8 -*-
 #
 
-from ftframework.communication.Client import Client
-from ftframework.config import getConfig, getServerConfig, getClientConfig, getPeripheralsConfig, mergeConfigs
-from ftframework.peripherals.common.display import getDisplays, datahandlerdisplays
-from ftframework.peripherals.common.controller import getControllers
-from ftframework.peripherals.common.complex.LocalClass import getClasses, initializeClasses, datahandlercomplex
-from twisted.internet import reactor
-from _thread import start_new_thread
 import argparse
 import socket
 import sys
+from _thread import start_new_thread
+
+from twisted.internet import reactor
+
+from ftframework.communication.Client import Client
+from ftframework.config import getClientConfig, getConfig, getPeripheralsConfig, getServerConfig, mergeConfigs
+from ftframework.peripherals.common.complex.LocalClass import datahandlercomplex, getClasses, initializeClasses
+from ftframework.peripherals.common.controller import getControllers
+from ftframework.peripherals.common.display import datahandlerdisplays, getDisplays
 
 sys.path.append('.')
 
 args = argparse.ArgumentParser(description='ftFramework client')
 args.add_argument('--name', default=socket.gethostname(), help='The name of the client')
-args.add_argument('--disable-displays', action='store_false', default=True, dest='displays', help='Set  this if displays should be disabled')
+args.add_argument('--disable-displays', action='store_false', default=True, dest='displays',
+                  help='Set  this if displays should be disabled')
 args.add_argument('config', help='Path to global config.json')
 args = args.parse_args()
 

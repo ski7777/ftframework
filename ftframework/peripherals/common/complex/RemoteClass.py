@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 #
 
-from .LocalClass import getClass
 from ftframework.communication.Messages import msgCall
+from .LocalClass import getClass
 
 
 class RemoteClass:
@@ -31,7 +31,7 @@ class RemoteClass:
                 for n, v in kwarg.items():
                     arguments[n] = v
                 # cleanup arguments
-                arguments = dict([(k, v)for k, v in arguments.items() if k in [n for n, t, r in argumentsspec]])
+                arguments = dict([(k, v) for k, v in arguments.items() if k in [n for n, t, r in argumentsspec]])
                 # check all arguments
                 for n, t, r in argumentsspec:
                     if t and n not in arguments:
@@ -44,7 +44,8 @@ class RemoteClass:
                     v = arguments[n]
                     if not isinstance(v, t):
                         # fail if type mismatch
-                        raise TypeError('Argument ' + n + 'is type ' + type(v).__name__ + ', expected ' + t.__name__ + '!')
+                        raise TypeError(
+                            'Argument ' + n + 'is type ' + type(v).__name__ + ', expected ' + t.__name__ + '!')
             else:
                 if len(args) != 0 or len(kwarg) != 0:
                     # raise error if args given but not needed
@@ -65,9 +66,10 @@ class RemoteClass:
             self.client.sendData(pkg)
             if retval:
                 # return return value
-                return(call.waitOnResponse())
+                return (call.waitOnResponse())
             # no return value -> no return
-        return(method)
+
+        return (method)
 
 
 def initializeRemoteClasses(config, clients, calldispatcher):
@@ -76,4 +78,4 @@ def initializeRemoteClasses(config, clients, calldispatcher):
     for n, d in config.items():
         # initialize RemoteClass for each complex with name, config and client
         classes[n] = RemoteClass(n, d, clients[d['client']], calldispatcher)
-    return(classes)
+    return (classes)

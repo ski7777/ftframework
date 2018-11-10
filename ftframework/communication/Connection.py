@@ -3,9 +3,11 @@
 #
 
 from twisted.protocols.basic import LineReceiver
-from .Package import Package
+
 from .Messages import msgPing, msgPong
+from .Package import Package
 from .PingThread import PingThread
+
 
 # this class represents the connection between two parties
 
@@ -58,10 +60,10 @@ class Connection(LineReceiver):
                 print('OUT:', package.getJSON())
             # send data
             self.sendLine(package.getJSON().encode('utf-8'))
-            return(True)
+            return (True)
         else:
             # if send was not allowed return False
-            return(False)
+            return (False)
 
     def systemLineRecieved(self, package):
         # dummy method for system packages

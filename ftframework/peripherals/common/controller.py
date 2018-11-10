@@ -54,4 +54,4 @@ def getControllers(controllerconfigs):
                 # get the extension from the master
                 controllers[n]['controller'] = controllers[c['master']]['mastercontroller'].robotx(c['id'])
     # return controllers
-    return(controllers)
+    return (controllers)
