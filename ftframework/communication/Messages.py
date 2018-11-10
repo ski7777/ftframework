@@ -86,3 +86,13 @@ msgCallResponse = Package({
         'value': None
     }
 })
+
+msgCallException = Package({
+    'type': 'data',
+    'status': 'ok',
+    'data': {
+        'id': '',
+        'name': '',
+        'text': ''
+    }
+})
