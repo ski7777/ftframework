@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 
-from ftframework.communication.Messages import msgCall, msgCallResponse
+from ftframework.communication.Messages import msgCall, msgCallException, msgCallResponse
 
 
 def getClass(config):
@@ -35,13 +35,24 @@ def datahandlercomplex(complex, server, data):
         try:
             # get complex
             complex = complex[data.data['peripheral']]
+            # Prepare variable for return package
+            ret = None
             # get method by object and name, call it with arguments
-            retval = getattr(complex['object'], data.data['call'])(**data.data['arguments'])
-            if 'return' in complex['object'].calls[data.data['call']]:
-                ret = msgCallResponse
+            try:
+                retval = getattr(complex['object'], data.data['call'])(**data.data['arguments'])
+                if 'return' in complex['object'].calls[data.data['call']]:
+                    ret = msgCallResponse
+                    ret.data['value'] = retval
+            # catch exception and load data in package
+            except Exception as e:
+                ret = msgCallException
+                ret.data['name'] = e.__class__.__name__
+                ret.data['text'] = e.__str__()
+            # send back all collected data if available and id given
+            if ret is not None and data.data['id'] != '':
                 ret.data['id'] = data.data['id']
-                ret.data['value'] = retval
                 server.sendData(ret)
+        # catch KeyError here. If peripheral is unknown we will catch it here
         except KeyError:
             pass
         return(True)
