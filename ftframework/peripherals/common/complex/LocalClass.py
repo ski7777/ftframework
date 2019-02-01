@@ -7,7 +7,7 @@ from ftframework.communication.Messages import msgCall, msgCallException, msgCal
 
 def getClass(config):
     if config['builtin']:
-        prefix = 'ftframework.peripherals.common'
+        prefix = 'ftframework.peripherals.common.'
     else:
         prefix = ''
     module = __import__(prefix + config['path'], fromlist=[config['name']])
