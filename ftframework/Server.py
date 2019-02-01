@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 #
 
-from _thread import start_new_thread
-
 from twisted.internet import reactor
 
+from _thread import start_new_thread
 from ftframework.communication.Server import Server as ComServer
 from ftframework.config import getConfig, getServerConfig, getServerPeripheralConfig
-from ftframework.peripherals.common.complex.RemoteCallDispatcher import RemoteCallDispatcher
-from ftframework.peripherals.common.complex.RemoteClass import initializeRemoteClasses
+from ftframework.peripherals.common.complex.RemoteCallDispatcher import \
+    RemoteCallDispatcher
+from ftframework.peripherals.common.complex.RemoteClass import \
+    initializeRemoteClasses
 from ftframework.peripherals.common.display import initializeRemoteDisplays
 
 
@@ -22,7 +23,8 @@ class Server:
         # load config and get special parts
         self.config = getConfig(config)
         self.serverconfig = getServerConfig(self.config)
-        self.peripheralsconfig = getServerPeripheralConfig(self.config, ['displays', 'complex'])
+        self.peripheralsconfig = getServerPeripheralConfig(
+            self.config, ['displays', 'complex'])
         # initialize server
         self.server = ComServer(self.datahandler, self.config)
         reactor.listenTCP(self.serverconfig['port'],  self.server)

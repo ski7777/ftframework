@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 #
 
-from ftframework.communication.Messages import msgCall, msgCallException, msgCallResponse
+from ftframework.communication.Messages import (msgCall, msgCallException,
+                                                msgCallResponse)
 
 
 def getClass(config):
@@ -39,7 +40,8 @@ def datahandlercomplex(complex, server, data):
             ret = None
             # get method by object and name, call it with arguments
             try:
-                retval = getattr(complex['object'], data.data['call'])(**data.data['arguments'])
+                retval = getattr(complex['object'], data.data['call'])(
+                    **data.data['arguments'])
                 if 'return' in complex['object'].calls[data.data['call']]:
                     ret = msgCallResponse
                     ret.data['value'] = retval

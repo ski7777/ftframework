@@ -5,14 +5,14 @@
 import hashlib
 import json
 
-
 # just some helper methods around the configuration file
 
 
 def getConfig(path):
     with open(path) as f:
         data = json.load(f)
-    data['checksum'] = hashlib.md5(json.dumps(data, sort_keys=True).encode('utf-8')).hexdigest()
+    data['checksum'] = hashlib.md5(json.dumps(
+        data, sort_keys=True).encode('utf-8')).hexdigest()
     return (data)
 
 
@@ -107,7 +107,8 @@ def getServerPeripheralConfig(config, names):
             except KeyError:
                 pass
     # get minimized peripheral configs for peripheral types
-    config = dict([(n, d) for n, d in getPeripheralsConfig(config).items() if n in names])
+    config = dict([(n, d) for n, d in getPeripheralsConfig(
+        config).items() if n in names])
     # iterate over peripheral types
     for cn, cd in config.items():
         # iterate over peripheral names
