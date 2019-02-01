@@ -26,6 +26,31 @@ def getServerConfig(config):
     return(default)
 
 
+def getConnectionConfig(config):
+    def updaterecursive(value, nvalue):
+        if not isinstance(value, dict) or not isinstance(nvalue, dict):
+            return nvalue
+        for k, v in nvalue.items():
+            value.setdefault(k, dict())
+            if isinstance(v, dict):
+                v = updaterecursive(value[k], v)
+            value[k] = v
+        return value
+
+    default = {
+        "debug": False,
+        "ping": {
+            "startupwait": 5,
+            "pinginterval": 15,
+            "pongmaxage": 60,
+            "runinterval": 15
+        }
+    }
+    if 'connection' in config:
+        default = updaterecursive(default, config['connection'])
+    return(default)
+
+
 def getClientConfig(config, name):
     return (config['clients'][name])
 

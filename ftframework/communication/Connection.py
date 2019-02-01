@@ -4,10 +4,11 @@
 
 from twisted.protocols.basic import LineReceiver
 
+from ftframework.config import getConnectionConfig
+
 from .Messages import msgPing, msgPong
 from .Package import Package
 from .PingThread import PingThread
-
 
 # this class represents the connection between two parties
 
@@ -22,7 +23,7 @@ class Connection(LineReceiver):
     def __init__(self, transporter):
         # transporter can be either Server or Client
         self.transporter = transporter
-        self.config = self.transporter.config['connection']
+        self.config = getConnectionConfig(self.transporter.config)
         self.checksum = self.transporter.config['checksum']
         self.debug = self.config['debug']
         self.pingthread = PingThread(self)
