@@ -6,7 +6,8 @@ from twisted.internet import reactor
 
 from _thread import start_new_thread
 from ftframework.communication.Server import Server as ComServer
-from ftframework.config import getConfig, getServerConfig, getServerPeripheralConfig
+from ftframework.config import (getClientsConfig, getConfig, getConfigKeyEmpty,
+                                getServerConfig, getServerPeripheralConfig)
 from ftframework.peripherals.common.complex.RemoteCallDispatcher import \
     RemoteCallDispatcher
 from ftframework.peripherals.common.complex.RemoteClass import \
@@ -32,11 +33,13 @@ class Server:
         print('Server ready!')
         print('Waiting for clients!')
         # wait for clients
-        while not self.config['clients'].keys() == set(self.server.clients):
+        while not getClientsConfig(self.config).keys() == set(self.server.clients):
             pass
         print('All clients connected!')
-        self.attributes.update(initializeRemoteClasses(self.peripheralsconfig['complex'], self.server.clients, self.calldispatcher))
-        self.attributes.update(initializeRemoteDisplays(self.peripheralsconfig['displays'], self.config['clients'], self.server.clients))
+        self.attributes.update(initializeRemoteClasses(
+            getConfigKeyEmpty(self.peripheralsconfig, 'complex'), self.server.clients, self.calldispatcher))
+        self.attributes.update(initializeRemoteDisplays(
+            getConfigKeyEmpty(self.peripheralsconfig, 'displays'), getConfigKeyEmpty(self.config, 'clients'), self.server.clients))
 
     def registerDataHandler(self, call, data=None):
         self.datahandlers.append((call, data))

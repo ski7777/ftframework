@@ -51,19 +51,29 @@ def getConnectionConfig(config):
     return(default)
 
 
+def getClientsConfig(config):
+    if 'clients' in config:
+        return(config['clients'])
+    return({})
+
+
 def getClientConfig(config, name):
-    return (config['clients'][name])
+    return (getClientsConfig(config)[name])
 
 
 def getPeripheralsConfig(config):
-    return (config['peripherals'])
+    if 'peripherals' in config:
+        return(config['peripherals'])
+    else:
+        return({})
 
 
 def findDisplay(clients, name):
     for n, c in clients.items():
         p = getPeripheralsConfig(c)
-        if name in p['displays']:
-            return (n)
+        if 'displays' in p:
+            if name in p['displays']:
+                return (n)
 
 
 def mergeConfigs(client, general, configtype):
@@ -98,7 +108,7 @@ def getServerPeripheralConfig(config, names):
     # create dict(name->{}) for all types of peripherals
     peripherals = dict([(n, {}) for n in names])
     # iterate over clients
-    for n, d in config['clients'].items():
+    for n, d in getClientsConfig(config).items():
         # iterate over types
         for pn in names:
             try:
@@ -114,5 +124,14 @@ def getServerPeripheralConfig(config, names):
         # iterate over peripheral names
         for pn in cd.keys():
             # save client name in peripheral
-            config[cn][pn]['client'] = findPeripheral(peripherals[cn], pn)
+            try:
+                config[cn][pn]['client'] = findPeripheral(peripherals[cn], pn)
+            except KeyError:
+                continue
     return (config)
+
+
+def getConfigKeyEmpty(config, name):
+    if name in config:
+        return(config[name])
+    return({})
