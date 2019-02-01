@@ -17,7 +17,13 @@ def getConfig(path):
 
 
 def getServerConfig(config):
-    return (config['server'])
+    default = {
+        'host': '192.168.12.102',
+        'port': 4711
+    }
+    if 'server' in config:
+        default.update(config['server'])
+    return(default)
 
 
 def getClientConfig(config, name):
